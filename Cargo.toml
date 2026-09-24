@@ -1,0 +1,31 @@
+[package]
+name = "cd-service"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "Central metadata service for Crate Digger"
+
+[dependencies]
+cd-protocol = { git = "https://github.com/timini/crate-digger", tag = "protocol-v1" }
+axum = "0.8.9"
+tokio = { version = "1.53.1", features = ["macros", "rt-multi-thread", "net", "signal", "sync", "time"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+jsonwebtoken = { version = "11.1.0", default-features = false, features = ["rust_crypto"] }
+reqwest = { version = "0.13.5", default-features = false, features = ["rustls", "json"] }
+async-trait = "0.1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+uuid = { version = "1.26.1", features = ["v4"] }
+url = "2.5"
+
+[dev-dependencies]
+rsa = { version = "0.9", features = ["pem"] }
+rand = "0.8"
+base64 = "0.22"
+tower = { version = "0.5.3", features = ["util"] }
+http-body-util = "0.1"
+
+[profile.release]
+codegen-units = 4
+lto = "thin"
