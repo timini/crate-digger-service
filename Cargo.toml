@@ -6,7 +6,7 @@ publish = false
 description = "Central metadata service for Crate Digger"
 
 [dependencies]
-cd-protocol = { git = "https://github.com/timini/crate-digger", tag = "protocol-v1" }
+cd-protocol = { git = "https://github.com/timini/crate-digger", tag = "protocol-v1.1" }
 axum = "0.8.9"
 tokio = { version = "1.53.1", features = ["macros", "rt-multi-thread", "net", "signal", "sync", "time"] }
 serde = { version = "1.0", features = ["derive"] }

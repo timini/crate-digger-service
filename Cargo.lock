@@ -175,7 +175,7 @@ dependencies = [
 [[package]]
 name = "cd-protocol"
 version = "0.1.0"
-source = "git+https://github.com/timini/crate-digger?tag=protocol-v1#f78ce9ed89ffc05335632bc9f5ccc2dd0462c9b7"
+source = "git+https://github.com/timini/crate-digger?tag=protocol-v1.1#c4105c19c5ce10ea56d47950bd0606c47f323a52"
 dependencies = [
  "serde",
  "serde_json",

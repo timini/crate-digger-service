@@ -425,6 +425,7 @@ fn snapshot() -> Snapshot {
             metadata: Metadata::default(),
             fingerprint_hash: None,
             kept: true,
+            file: None,
         }],
         ratings: vec![Rating {
             track: "t1".into(),
