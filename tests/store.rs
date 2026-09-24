@@ -79,3 +79,19 @@ async fn firestore_store() {
     let run = uuid::Uuid::new_v4().simple().to_string();
     conformance(&fs, &run[..8]).await;
 }
+
+#[tokio::test]
+async fn firestore_rules_refuse_direct_clients() {
+    let Ok(host) = std::env::var("FIRESTORE_EMULATOR_HOST") else {
+        eprintln!("skipped: FIRESTORE_EMULATOR_HOST is not set");
+        return;
+    };
+    // Without the service's credentials, a write is refused by firestore.rules.
+    let res = reqwest::Client::new()
+        .post(format!("http://{host}/v1/projects/demo-crate-digger/databases/(default)/documents/backups?documentId=x"))
+        .json(&json!({ "fields": { "json": { "stringValue": "{}" } } }))
+        .send()
+        .await
+        .unwrap();
+    assert_eq!(res.status().as_u16(), 403);
+}

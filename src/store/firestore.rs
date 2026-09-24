@@ -32,7 +32,8 @@ impl Tokens {
         }
     }
 
-    /// For emulators, which accept unauthenticated requests.
+    /// For the Firestore emulator: its `owner` token acts like the service
+    /// account, which security rules do not restrict.
     pub fn none(http: reqwest::Client) -> Self {
         Self {
             http,
@@ -43,7 +44,7 @@ impl Tokens {
 
     async fn bearer(&self) -> StoreResult<Option<String>> {
         if self.disabled {
-            return Ok(None);
+            return Ok(Some("owner".into()));
         }
         let mut cached = self.cached.lock().await;
         if let Some((token, until)) = cached.as_ref() {
